@@ -21,7 +21,7 @@ const ProjectList = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get(`/api/projects`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`);
       setProjects(response.data);
     } catch (error) {
       toast.error("Failed to fetch projects");
@@ -33,7 +33,7 @@ const ProjectList = () => {
   const handleCreateProject = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/projects`, newProject);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/projects`, newProject);
       setProjects([...projects, response.data]);
       setShowModal(false);
       setNewProject({ name: "", description: "" });
@@ -47,7 +47,7 @@ const ProjectList = () => {
   const handleDeleteProject = async (id) => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
-        await axios.delete(`/api/projects/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/projects/${id}`);
         setProjects(projects.filter((p) => p._id !== id));
         toast.success("Project deleted successfully");
       } catch (error) {

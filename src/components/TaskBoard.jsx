@@ -57,8 +57,8 @@ const TaskBoard = () => {
   const fetchProjectAndTasks = async () => {
     try {
       const [projectRes, tasksRes] = await Promise.all([
-        axios.get(`/api/projects/${projectId}`),
-        axios.get(`/api/tasks/projects/${projectId}/tasks`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/projects/${projectId}`),
+        axios.get(`${import.meta.env.VITE_API_URL}/api/tasks/projects/${projectId}/tasks`)
       ]);
       setProject(projectRes.data);
       setTasks(tasksRes.data);
@@ -74,7 +74,7 @@ const TaskBoard = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `/api/tasks/projects/${projectId}/tasks`,
+        `${import.meta.env.VITE_API_URL}/api/tasks/projects/${projectId}/tasks`,
         newTask
       );
       const createdTask = response.data;
@@ -96,7 +96,7 @@ const TaskBoard = () => {
   const handleStatusChange = async (taskId, newStatus) => {
     try {
       const response = await axios.patch(
-        `/api/tasks/tasks/${taskId}/status`,
+        `${import.meta.env.VITE_API_URL}/api/tasks/tasks/${taskId}/status`,
         { status: newStatus }
       );
       const updatedTask = response.data;
@@ -117,7 +117,7 @@ const TaskBoard = () => {
   const handleDeleteTask = async (taskId) => {
     if (window.confirm("Are you sure you want to delete this task?")) {
       try {
-        await axios.delete(`/api/tasks/tasks/${taskId}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/tasks/${taskId}`);
         setTasks(prev => prev.filter(t => t._id !== taskId));
         if (socket) {
           socket.emit("task-deleted", {

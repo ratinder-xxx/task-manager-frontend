@@ -17,7 +17,7 @@ const AddMemberModal = ({ projectId, onClose, onMemberAdded }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `/api/users?search=${searchTerm}`
+        `${import.meta.env.VITE_API_URL}/api/users?search=${searchTerm}`
       );
       setUsers(response.data.users);
     } catch (error) {
@@ -35,7 +35,7 @@ const AddMemberModal = ({ projectId, onClose, onMemberAdded }) => {
 
     try {
       await axios.post(
-        `/api/projects/${projectId}/members`,
+        `${import.meta.env.VITE_API_URL}/api/projects/${projectId}/members`,
         { memberId: selectedUser._id }
       );
       toast.success(`${selectedUser.username} added to project successfully`);

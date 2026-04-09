@@ -11,7 +11,7 @@ const MembersList = ({ project, projectId, onMemberRemoved }) => {
     if (window.confirm(`Remove ${memberName} from this project?`)) {
       try {
         await axios.delete(
-          `/api/projects/${projectId}/members/${memberId}`
+          `${import.meta.env.VITE_API_URL}/api/projects/${projectId}/members/${memberId}`
         );
         setMembers(members.filter(m => m._id !== memberId));
         onMemberRemoved(memberId);
