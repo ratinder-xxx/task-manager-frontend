@@ -35,6 +35,7 @@ const MembersList = ({ project, projectId, onMemberRemoved }) => {
       </div>
 
       <div className="space-y-2">
+        {console.log(project)}
         {/* Project Owner */}
         {project?.owner && (
           <div className="flex justify-between items-center p-2 bg-gray-50 rounded">

@@ -12,16 +12,18 @@ const ProjectList = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [newProject, setNewProject] = useState({ name: "", description: "" });
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [showMembersModal]);
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/projects`,
+      );
       setProjects(response.data);
     } catch (error) {
       toast.error("Failed to fetch projects");
@@ -33,7 +35,10 @@ const ProjectList = () => {
   const handleCreateProject = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/projects`, newProject);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/projects`,
+        newProject,
+      );
       setProjects([...projects, response.data]);
       setShowModal(false);
       setNewProject({ name: "", description: "" });
@@ -47,7 +52,9 @@ const ProjectList = () => {
   const handleDeleteProject = async (id) => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/api/projects/${id}`);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL}/api/projects/${id}`,
+        );
         setProjects(projects.filter((p) => p._id !== id));
         toast.success("Project deleted successfully");
       } catch (error) {
@@ -79,7 +86,10 @@ const ProjectList = () => {
       <div className="bg-white shadow">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">Projects</h1>
-          <div className="space-x-4">
+          <div className="space-x-4 flex h-full">
+            <h1 className="text-xl text-gray-500 flex items-center">
+              Hello, {user?.username}
+            </h1>
             <button
               onClick={() => setShowModal(true)}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -99,13 +109,16 @@ const ProjectList = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <div className="bg-white rounded-lg shadow-md p-6" key={project._id}>
+            <div
+              className="bg-white rounded-lg shadow-md p-6"
+              key={project._id}
+            >
               <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
               <p className="text-gray-600 mb-4">{project.description}</p>
 
               {/* Show member count */}
               <div className="text-sm text-gray-500 mb-3">
-                👥 {project.members?.length || 1} members
+                {project.members?.length || 1} members
               </div>
 
               <div className="flex justify-between items-center">

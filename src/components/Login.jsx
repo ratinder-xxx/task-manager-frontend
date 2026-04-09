@@ -9,7 +9,7 @@ const Login = () => {
     email: "",
     password: ""
   });
-  const { login, register } = useAuth();
+  const { login, register, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -78,7 +78,7 @@ const Login = () => {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
           >
-            {isLogin ? "Login" : "Register"}
+            {loading? "Please wait..." : isLogin ? "Login" : "Register"}
           </button>
         </form>
         <button
