@@ -11,7 +11,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      const newSocket = io("https://task-manager-23gz.onrender.com", {
+      const newSocket = io(import.meta.env.VITE_API_URL, {
         auth: { token },
         transports: ["websocket"]
       });
