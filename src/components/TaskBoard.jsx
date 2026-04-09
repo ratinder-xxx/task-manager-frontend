@@ -66,7 +66,7 @@ const TaskBoard = () => {
       setTasks(prev => prev.map(t => 
         t._id === updatedTask._id ? updatedTask : t
       ));
-      toast.info(`Task updated: ${updatedTask.title}`);
+      toast.success(`Task updated: ${updatedTask.title}`);
     };
 
     // Handle status changes
@@ -75,14 +75,14 @@ const TaskBoard = () => {
       setTasks(prev => prev.map(t => 
         t._id === data.taskId ? { ...t, status: data.status } : t
       ));
-      toast.info(`Task status changed to ${data.status} by ${data.updatedBy}`);
+      toast.success(`Task status changed to ${data.status} by ${data.updatedBy}`);
     };
 
     // Handle task deletions
     const handleTaskDeleted = (data) => {
       console.log("Socket received task-deleted:", data);
       setTasks(prev => prev.filter(t => t._id !== data.taskId));
-      toast.info(`Task deleted by ${data.deletedBy}`);
+      toast.success(`Task deleted by ${data.deletedBy}`);
     };
 
     // Register event listeners
@@ -222,7 +222,7 @@ const TaskBoard = () => {
           <div>
             <button
               onClick={() => navigate("/projects")}
-              className="text-blue-500 hover:text-blue-600 mr-4"
+              className="text-blue-500 cursor-pointer hover:text-blue-600 mr-4"
             >
               ← Back to Projects
             </button>
@@ -231,7 +231,7 @@ const TaskBoard = () => {
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600"
           >
             Add Task
           </button>
@@ -267,7 +267,7 @@ const TaskBoard = () => {
                       </select>
                       <button
                         onClick={() => handleDeleteTask(task._id)}
-                        className="text-red-500 hover:text-red-600 text-sm"
+                        className="text-red-500 cursor-pointer hover:text-red-600 text-sm"
                       >
                         Delete
                       </button>
@@ -295,7 +295,7 @@ const TaskBoard = () => {
               <h2 className="text-xl font-bold">Create New Task</h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
+                className="text-gray-500 cursor-pointer hover:text-gray-700 text-2xl"
               >
                 ×
               </button>
@@ -339,13 +339,13 @@ const TaskBoard = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 border rounded hover:bg-gray-100"
+                  className="px-4 py-2 cursor-pointer border rounded hover:bg-gray-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="px-4 py-2 cursor-pointer bg-blue-500 text-white rounded hover:bg-blue-600"
                 >
                   Create Task
                 </button>

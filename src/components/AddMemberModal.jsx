@@ -53,7 +53,7 @@ const AddMemberModal = ({ projectId, onClose, onMemberAdded }) => {
           <h2 className="text-xl font-bold">Add Team Member</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-gray-700 cursor-pointer"
           >
             ×
           </button>
@@ -101,14 +101,14 @@ const AddMemberModal = ({ projectId, onClose, onMemberAdded }) => {
         <div className="flex justify-end space-x-2 mt-4">
           <button
             onClick={onClose}
-            className="px-4 py-2 border rounded-lg hover:bg-gray-100"
+            className="px-4 py-2 border rounded-lg hover:bg-gray-100 cursor-pointer"
           >
             Cancel
           </button>
           <button
             onClick={handleAddMember}
             disabled={!selectedUser}
-            className={`px-4 py-2 rounded-lg ${
+            className={`px-4 py-2 rounded-lg cursor-pointer ${
               selectedUser
                 ? "bg-blue-500 text-white hover:bg-blue-600"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"

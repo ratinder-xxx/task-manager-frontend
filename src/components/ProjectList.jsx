@@ -92,13 +92,13 @@ const ProjectList = () => {
             </h1>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600"
             >
               New Project
             </button>
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              className="bg-red-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-red-600"
             >
               Logout
             </button>
@@ -124,20 +124,20 @@ const ProjectList = () => {
               <div className="flex justify-between items-center">
                 <button
                   onClick={() => navigate(`/projects/${project._id}`)}
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                  className="bg-green-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-green-600"
                 >
                   View Tasks
                 </button>
                 <div className="space-x-2">
                   <button
                     onClick={() => handleViewMembers(project)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600"
                   >
                     Members
                   </button>
                   <button
                     onClick={() => handleDeleteProject(project._id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                    className="bg-red-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-red-600"
                   >
                     Delete
                   </button>
@@ -183,13 +183,13 @@ const ProjectList = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 border rounded hover:bg-gray-100"
+                  className="px-4 cursor-pointer py-2 border rounded hover:bg-gray-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="px-4 cursor-pointer py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                 >
                   Create
                 </button>
@@ -207,7 +207,7 @@ const ProjectList = () => {
               </h2>
               <button
                 onClick={() => setShowMembersModal(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 cursor-pointer hover:text-gray-700"
               >
                 ×
               </button>

@@ -4,31 +4,40 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
   });
-  const { login, register, loading } = useAuth();
+  const { login, register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let success;
-    if (isLogin) {
-      success = await login(formData.email, formData.password);
-    } else {
-      success = await register(formData.username, formData.email, formData.password);
-    }
-    if (success) {
-      navigate("/projects");
+    if (!loading) {
+      setLoading(true);
+      let success;
+      if (isLogin) {
+        success = await login(formData.email, formData.password);
+      } else {
+        success = await register(
+          formData.username,
+          formData.email,
+          formData.password,
+        );
+      }
+      if (success) {
+        navigate("/projects");
+      }
+      setLoading(false);
     }
   };
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -76,14 +85,14 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+            className="w-full cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
           >
-            {loading? "Please wait..." : isLogin ? "Login" : "Register"}
+            {loading ? "Please wait..." : isLogin ? "Login" : "Register"}
           </button>
         </form>
         <button
           onClick={() => setIsLogin(!isLogin)}
-          className="w-full mt-4 text-blue-500 hover:text-blue-600"
+          className="w-full mt-4 cursor-pointer text-blue-500 hover:text-blue-600"
         >
           {isLogin ? "Need an account? Register" : "Have an account? Login"}
         </button>

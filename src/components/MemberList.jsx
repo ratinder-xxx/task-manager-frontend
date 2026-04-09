@@ -28,7 +28,7 @@ const MembersList = ({ project, projectId, onMemberRemoved }) => {
         <h3 className="text-lg font-semibold">Team Members</h3>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm"
+          className="bg-blue-500 cursor-pointer text-white px-3 py-1 rounded hover:bg-blue-600 text-sm"
         >
           + Add Member
         </button>
@@ -63,7 +63,7 @@ const MembersList = ({ project, projectId, onMemberRemoved }) => {
             {project?.owner?._id !== member._id && (
               <button
                 onClick={() => handleRemoveMember(member._id, member.username)}
-                className="text-red-500 hover:text-red-600 text-sm"
+                className="text-red-500 cursor-pointer hover:text-red-600 text-sm"
               >
                 Remove
               </button>
